@@ -12,19 +12,19 @@ from multiprocessing import Pool
 from typing import List
 import tempfile, shutil  
 from pathlib import Path    
+import demo
+import os
 
-def _run_one(video: pathlib.Path, opts):
-    cmd = [
-        sys.executable, "./demo.py",
-        "--video",
-        "--input", str(video),
-        "--gpu_ids", str(opts.gpu_ids),
-        "--arc", opts.arc,
-        "--resume", opts.resume,
-        "--batch_size", "15",
-        "--num_workers", "5",
-    ]
-    subprocess.run(cmd, check=True)
+def _run_one(opts):
+    demo.main(
+        opts.num_main_classes,
+        opts.num_sub_classes,
+        opts.arc,
+        opts.neighbor_num,
+        opts.metric,
+        opts.input,
+        opts.out_path,
+    )
 
 VIDEO_EXTS = {".mp4"}
 
@@ -42,27 +42,38 @@ def _collect_sources(src_args):
                 videos.append(f)        # keep as Path
     return videos
 
-def main():
+def main(PATH_VIDEO, OUT_PATH):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", required=True, nargs="+",
-                    help="Video paths or glob patterns (absolute or relative).")
-    ap.add_argument("--resume", default="/Users/bezolge1/Downloads/BCM-Collaboration/OpenGraphAU/checkpoints/OpenGprahAU-ResNet18_second_stage.pth")
+    #ap.add_argument("--src", required=True, nargs="+",
+    #                help="Video paths or glob patterns (absolute or relative).")
+    #ap.add_argument("--resume", default="/Users/bezolge1/Downloads/BCM-Collaboration/OpenGraphAU/checkpoints/OpenGprahAU-ResNet18_second_stage.pth")
     ap.add_argument("--arc", default="resnet18")
     ap.add_argument("--gpu_ids", default="-1")
     ap.add_argument("--parallel", action="store_true")
+    ap.add_argument("--num_main_classes", type=int, default=27)
+    ap.add_argument("--num_sub_classes", type=int, default=14)
+    ap.add_argument("--neighbor_num", type=int, default=4)
+    ap.add_argument("--metric", type=str, default='dots', help="metric for graph top-K nearest neighbors selection")
     opts = ap.parse_args()
+    #opts.src = [PATH_VIDEO]  # Directly set the source path for testing
+    opts.input = PATH_VIDEO
+    opts.out_path = OUT_PATH
+    _run_one(opts)
 
-    videos = _collect_sources(opts.src)
-    if not videos:
-        sys.exit("No matching input files.")
+    # videos = _collect_sources(opts.src)
 
-    if opts.parallel:
-        with Pool() as pool:
-            pool.starmap(_run_one, [(v, opts) for v in videos])
-    else:
-        for v in videos:
-            print(f"Runnning video: {v}")
-            _run_one(v, opts)
+    # if not videos:
+    #     sys.exit("No matching input files.")
+
+    # if opts.parallel:
+    #     with Pool() as pool:
+    #         pool.starmap(_run_one, [(v, opts) for v in videos])
+    # else:
+    #     for v in videos:
+    #         print(f"Runnning video: {v}")
+    #         _run_one(v, opts)
 
 if __name__ == "__main__":
-    main()
+    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
+    OUT_PATH = os.path.dirname(PATH_VIDEO)
+    main(PATH_VIDEO, OUT_PATH)

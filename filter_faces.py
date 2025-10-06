@@ -3,6 +3,8 @@ import argparse
 import cv2
 import numpy as np
 import pandas as pd
+import os
+from pathlib import Path
 
 CASCADE_PATH = "./haarcascade_frontalface_default.xml"
 
@@ -25,11 +27,14 @@ def _detect_gpu(cascade):
         return int(len(faces) == 1)
     return f
 
-def main(base: str, video_dir:str):
+def main(video_path):
 
-    filtered_output_csv = f"{video_dir}/{base}_filtered_results.csv"
-    video_path = f"{video_dir}/{base}.mp4"
-    au_path = f"{video_path}_au_predictions.npy"
+    # e.g. video_path = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010349.MP4"
+    video_dir = os.path.dirname(video_path)
+    base = os.path.basename(video_path)
+
+    filtered_output_csv = f"{video_dir}/filtered_results.csv"
+    au_path = f"{video_dir}/au_predictions.npy"
 
     face_cascade = cv2.CascadeClassifier(CASCADE_PATH)
     au_df = pd.DataFrame(np.load(au_path))
@@ -64,9 +69,7 @@ def main(base: str, video_dir:str):
 
     print(f"Filtered AU results saved to {filtered_output_csv} with {len(filtered_df)} valid frames.")
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Filter AU results keeping frames with exactly one face.")
-    parser.add_argument("--video_dir", help="video directory")
-    parser.add_argument("--base", help="Base filename without extension")
-    args = parser.parse_args()
-    main(args.base, args.video_dir)
+    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
+    main(PATH_VIDEO)

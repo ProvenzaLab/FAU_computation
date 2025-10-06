@@ -1,0 +1,5 @@
+outpath/*
+__pycache__/*
+__pycache__
+notes.txt
+.DS_Store

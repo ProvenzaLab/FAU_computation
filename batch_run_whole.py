@@ -42,7 +42,7 @@ def _collect_sources(src_args):
                 videos.append(f)        # keep as Path
     return videos
 
-def main(PATH_VIDEO, OUT_PATH):
+def main(PATH_VIDEO):
     ap = argparse.ArgumentParser()
     #ap.add_argument("--src", required=True, nargs="+",
     #                help="Video paths or glob patterns (absolute or relative).")
@@ -57,23 +57,9 @@ def main(PATH_VIDEO, OUT_PATH):
     opts = ap.parse_args()
     #opts.src = [PATH_VIDEO]  # Directly set the source path for testing
     opts.input = PATH_VIDEO
-    opts.out_path = OUT_PATH
+    opts.out_path = os.path.dirname(PATH_VIDEO)
     _run_one(opts)
 
-    # videos = _collect_sources(opts.src)
-
-    # if not videos:
-    #     sys.exit("No matching input files.")
-
-    # if opts.parallel:
-    #     with Pool() as pool:
-    #         pool.starmap(_run_one, [(v, opts) for v in videos])
-    # else:
-    #     for v in videos:
-    #         print(f"Runnning video: {v}")
-    #         _run_one(v, opts)
-
-if __name__ == "__main__":
-    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
-    OUT_PATH = os.path.dirname(PATH_VIDEO)
-    main(PATH_VIDEO, OUT_PATH)
+#if __name__ == "__main__":
+#    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
+#    main(PATH_VIDEO)

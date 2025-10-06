@@ -47,7 +47,7 @@ def process(video_path: pathlib.Path) -> None:
 
     extra = extra[:-1]
 
-    cap = cv2.VideoCapture(str(video_dir))
+    cap = cv2.VideoCapture(str(video_path))
     fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
     cap.release()
 
@@ -72,6 +72,6 @@ def main(video_path) -> None:
     full.to_csv(out_csv, index=False)
     print(f"wrote {out_csv}  rows={len(full)}")
 
-if __name__ == "__main__":
-    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010349.MP4"
-    main(PATH_VIDEO)
+#if __name__ == "__main__":
+#    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010349.MP4"
+#    main(PATH_VIDEO)

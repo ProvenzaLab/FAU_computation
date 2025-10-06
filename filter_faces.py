@@ -70,6 +70,6 @@ def main(video_path):
     print(f"Filtered AU results saved to {filtered_output_csv} with {len(filtered_df)} valid frames.")
 
 
-if __name__ == "__main__":
-    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
-    main(PATH_VIDEO)
+#if __name__ == "__main__":
+#    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
+#    main(PATH_VIDEO)

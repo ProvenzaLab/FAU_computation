@@ -45,7 +45,7 @@ PATH_LIST_WINDOWS = [
     r"Z:\aDBS-49155\aDBS012 Recordings\2024-02-12\Camera 1\GH012307.MP4",
     r"Z:\aDBS-49155\aDBS012 Recordings\2024-03-19\Camera 1\GH012354.MP4",
 ]
-for PATH_VIDEO in PATH_LIST:
+for PATH_VIDEO in PATH_LIST_WINDOWS:
     batch_run_whole.main(PATH_VIDEO)
     filter_faces.main(PATH_VIDEO)
     create_csv.main(PATH_VIDEO)

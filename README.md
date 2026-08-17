@@ -3,7 +3,7 @@
 Extract Facial Actiona Units (FAUs) for multiple videos using OpenGraphAU (https://github.com/lingjivoo/OpenGraphAU) fork with pre-trained ResNet-18 weights.
 Predict boolean detected face with OpenCV using Haar Casacades.
 
-Installation using `uv venv`, then `uv sync`.
+Installation using `uv venv`, then `uv pip install -r requirements.txt` 
 
 Wrapper call combined:
  - call `pipeline.py` with `PATH_VIDEO`

@@ -213,3 +213,6 @@ __pycache__/*
 __pycache__
 notes.txt
 .DS_Store
+
+*.npy
+settings.json

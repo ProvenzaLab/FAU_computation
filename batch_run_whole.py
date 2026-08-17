@@ -60,6 +60,6 @@ def main(PATH_VIDEO):
     opts.out_path = os.path.dirname(PATH_VIDEO)
     _run_one(opts)
 
-#if __name__ == "__main__":
-#    PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
-#    main(PATH_VIDEO)
+if __name__ == "__main__":
+   PATH_VIDEO = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010383.MOV"
+   main(PATH_VIDEO)

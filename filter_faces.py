@@ -32,6 +32,7 @@ def main(video_path):
     # e.g. video_path = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010349.MP4"
     video_dir = os.path.dirname(video_path)
     base = os.path.basename(video_path)
+    video_dir = os.path.join("outdir", os.path.basename(video_path)[:-4])  
 
     filtered_output_csv = f"{video_dir}/filtered_results.csv"
     au_path = f"{video_dir}/au_predictions.npy"

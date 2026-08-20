@@ -57,7 +57,9 @@ def main(PATH_VIDEO):
     opts = ap.parse_args()
     #opts.src = [PATH_VIDEO]  # Directly set the source path for testing
     opts.input = PATH_VIDEO
-    opts.out_path = os.path.dirname(PATH_VIDEO)
+    opts.out_path = os.path.join("outdir", os.path.basename(PATH_VIDEO)[:-4])  
+    # Create the output directory if it doesn't exist
+    os.makedirs(opts.out_path, exist_ok=True)
     _run_one(opts)
 
 if __name__ == "__main__":

@@ -28,6 +28,7 @@ def process(video_path: pathlib.Path) -> None:
            '23', '24', '25', '26', '27', '32', '38', '39', 'L1', 'R1', 'L2', 'R2', 'L4', 'R4', 'L6', 'R6', 'L10', 'R10', 'L12', 'R12', 'L14', 'R14']
     
     video_dir = os.path.dirname(video_path)
+    video_dir = os.path.join("outdir", os.path.basename(video_path)[:-4])  
 
     pred_path = os.path.join(video_dir, PRED_GLOB)
     comp_path = os.path.join(video_dir, COMPANION_SUFFIX)
@@ -67,6 +68,7 @@ def main(video_path) -> None:
 
     # e.g. video_path = "/Users/Timon/Documents/Houston/video_features/extracting_FAUs/outpath/GH010349.MP4"
     video_dir = os.path.dirname(video_path)
+    video_dir = os.path.join("outdir", os.path.basename(video_path)[:-4])  
     out_csv = f"{video_dir}/full_au_results.csv"
     full = process(video_path)
     full.to_csv(out_csv, index=False)

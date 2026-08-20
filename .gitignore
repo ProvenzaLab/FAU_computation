@@ -216,3 +216,5 @@ notes.txt
 
 *.npy
 settings.json
+
+outdir/*
